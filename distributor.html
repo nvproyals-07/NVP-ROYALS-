@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Distributor Registration | NVP ROYALS
+</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#02091c;
+    color:white;
+}
+
+.page{
+    min-height:100vh;
+    padding:40px 15px 70px;
+
+    background:
+    radial-gradient(
+        circle at top,
+        #123c83,
+        transparent 40%
+    ),
+    #02091c;
+}
+
+.container{
+    width:100%;
+    max-width:800px;
+    margin:auto;
+}
+
+.header{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.logo{
+    width:120px;
+    height:90px;
+    object-fit:contain;
+}
+
+.header h1{
+    font-family:Georgia,serif;
+    font-size:34px;
+    margin-top:10px;
+}
+
+.header h1 span{
+    color:#ffe58a;
+}
+
+.header p{
+    color:#9da8c2;
+    margin-top:10px;
+    line-height:1.6;
+}
+
+.form-box{
+    background:#03133f;
+
+    border:1px solid
+    rgba(215,165,34,.35);
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.4);
+}
+
+.form-grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:18px;
+}
+
+.group{
+    display:flex;
+    flex-direction:column;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+label{
+    font-size:13px;
+    color:#e7ebf5;
+    margin-bottom:7px;
+}
+
+.required{
+    color:#ffe58a;
+}
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:7px;
+
+    border:1px solid
+    rgba(215,165,34,.3);
+
+    background:#01091f;
+
+    color:white;
+
+    outline:none;
+
+    font-size:14px;
+}
+
+select option{
+    background:#03133f;
+    color:white;
+}
+
+textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:#ffe58a;
+
+    box-shadow:
+    0 0 0 3px
+    rgba(215,165,34,.08);
+}
+
+.terms{
+    grid-column:1/-1;
+
+    display:flex;
+
+    gap:10px;
+
+    align-items:flex-start;
+
+    color:#9da8c2;
+
+    font-size:12px;
+
+    line-height:1.6;
+}
+
+.terms input{
+    width:18px;
+    height:18px;
+    margin-top:2px;
+    accent-color:#d7a522;
+}
+
+.submit-area{
+    grid-column:1/-1;
+    margin-top:5px;
+}
+
+.submit-button{
+
+    width:100%;
+
+    padding:16px;
+
+    border:0;
+
+    border-radius:8px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #a8770a,
+        #ffe18a,
+        #b57c0b
+    );
+
+    color:#071027;
+
+    font-weight:bold;
+
+    font-size:14px;
+
+    cursor:pointer;
+}
+
+.submit-button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.success{
+
+    display:none;
+
+    margin-top:20px;
+
+    padding:18px;
+
+    border-radius:10px;
+
+    background:#123d26;
+
+    border:1px solid #27834b;
+
+    color:#c4ffd5;
+
+    line-height:1.7;
+
+    text-align:center;
+}
+
+.success.show{
+    display:block;
+}
+
+@media(max-width:700px){
+
+    .page{
+        padding:25px 12px 50px;
+    }
+
+    .form-box{
+        padding:20px 15px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full,
+    .terms,
+    .submit-area{
+        grid-column:auto;
+    }
+
+    .header h1{
+        font-size:28px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="page">
+
+<div class="container">
+
+
+<div class="header">
+
+<img
+src="logo.png"
+class="logo"
+alt="NVP ROYALS">
+
+<h1>
+Distributor
+<span>Registration</span>
+</h1>
+
+<p>
+NVP ROYALS Distributor बनने के लिए
+नीचे दी गई जानकारी भरें।
+</p>
+
+</div>
+
+
+<div class="form-box">
+
+<form id="distributorForm">
+
+<div class="form-grid">
+<!-- NAME -->
+
+<div class="group">
+
+<label for="name">
+पूरा नाम
+<span class="required">*</span>
+</label>
+
+<input
+type="text"
+id="name"
+placeholder="अपना पूरा नाम"
+required>
+
+</div>
+
+
+<!-- MOBILE -->
+
+<div class="group">
+
+<label for="mobile">
+Mobile Number
+<span class="required">*</span>
+</label>
+
+<input
+type="tel"
+id="mobile"
+placeholder="10 digit mobile number"
+inputmode="numeric"
+maxlength="10"
+required>
+
+</div>
+
+
+<!-- WHATSAPP -->
+
+<div class="group">
+
+<label for="whatsapp">
+WhatsApp Number
+<span class="required">*</span>
+</label>
+
+<input
+type="tel"
+id="whatsapp"
+placeholder="WhatsApp number"
+inputmode="numeric"
+maxlength="10"
+required>
+
+</div>
+
+
+<!-- EMAIL -->
+
+<div class="group">
+
+<label for="email">
+Email
+</label>
+
+<input
+type="email"
+id="email"
+placeholder="Email address">
+
+</div>
+
+
+<!-- STATE -->
+
+<div class="group">
+
+<label for="state">
+राज्य
+<span class="required">*</span>
+</label>
+
+<select
+id="state"
+required>
+
+<option value="">
+राज्य चुनें
+</option>
+
+<option>
+Madhya Pradesh
+</option>
+
+<option>
+Rajasthan
+</option>
+
+<option>
+Maharashtra
+</option>
+
+<option>
+Gujarat
+</option>
+
+<option>
+Uttar Pradesh
+</option>
+
+<option>
+Chhattisgarh
+</option>
+
+<option>
+Delhi
+</option>
+
+<option>
+Haryana
+</option>
+
+<option>
+Punjab
+</option>
+
+<option>
+Bihar
+</option>
+
+<option>
+Jharkhand
+</option>
+
+<option>
+Other
+</option>
+
+</select>
+
+</div>
+
+
+<!-- CITY -->
+
+<div class="group">
+
+<label for="city">
+City / Town
+<span class="required">*</span>
+</label>
+
+<input
+type="text"
+id="city"
+placeholder="शहर / कस्बा"
+required>
+
+</div>
+
+
+<!-- DISTRICT -->
+
+<div class="group">
+
+<label for="district">
+District
+<span class="required">*</span>
+</label>
+
+<input
+type="text"
+id="district"
+placeholder="जिला"
+required>
+
+</div>
+
+
+<!-- PINCODE -->
+
+<div class="group">
+
+<label for="pincode">
+PIN Code
+<span class="required">*</span>
+</label>
+
+<input
+type="text"
+id="pincode"
+placeholder="6 digit PIN"
+inputmode="numeric"
+maxlength="6"
+required>
+
+</div>
+
+
+<!-- ADDRESS -->
+
+<div class="group full">
+
+<label for="address">
+पूरा पता
+<span class="required">*</span>
+</label>
+
+<textarea
+id="address"
+placeholder="Shop / Office / घर का पूरा पता"
+required></textarea>
+
+</div>
+<!-- BUSINESS EXPERIENCE -->
+
+<div class="group">
+
+<label for="experience">
+Business Experience
+</label>
+
+<select id="experience">
+
+<option value="">
+Experience चुनें
+</option>
+
+<option>
+कोई Experience नहीं
+</option>
+
+<option>
+1 साल से कम
+</option>
+
+<option>
+1 - 3 साल
+</option>
+
+<option>
+3 - 5 साल
+</option>
+
+<option>
+5 साल से अधिक
+</option>
+
+</select>
+
+</div>
+
+
+<!-- INVESTMENT -->
+
+<div class="group">
+
+<label for="investment">
+अनुमानित Investment
+</label>
+
+<select id="investment">
+
+<option value="">
+Investment चुनें
+</option>
+
+<option>
+₹5,000 - ₹10,000
+</option>
+
+<option>
+₹10,000 - ₹25,000
+</option>
+
+<option>
+₹25,000 - ₹50,000
+</option>
+
+<option>
+₹50,000 - ₹1,00,000
+</option>
+
+<option>
+₹1,00,000 से अधिक
+</option>
+
+</select>
+
+</div>
+
+
+<!-- TERMS -->
+
+<div class="terms">
+
+<input
+type="checkbox"
+id="terms"
+required>
+
+<label for="terms">
+
+मैं पुष्टि करता/करती हूँ कि मेरे द्वारा दी गई
+सभी जानकारी सही है और मैं NVP ROYALS
+Distributor बनने के नियमों से सहमत हूँ।
+
+</label>
+
+</div>
+
+
+<!-- SUBMIT -->
+
+<div class="submit-area">
+
+<button
+type="submit"
+id="submitButton"
+class="submit-button">
+
+APPLICATION SUBMIT करें
+
+</button>
+
+</div>
+
+
+</div>
+
+</form>
+
+
+<!-- SUCCESS -->
+
+<div
+id="successMessage"
+class="success">
+
+<strong>
+Successfully Submitted
+</strong>
+
+<br><br>
+
+आपकी Distributor Application
+NVP ROYALS को भेज दी गई है।
+
+<br>
+
+हमारी team आपकी जानकारी check
+करके आपसे contact करेगी।
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<script>
+
+/* =====================================================
+   SUPABASE CONNECTION
+===================================================== */
+
+const SUPABASE_URL =
+"https://pybpdlubitlzlkmaohpw.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_Cki1_BdfpPeoU2yBgr1zIw_Ra7BqCwX";
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const distributorForm =
+document.getElementById(
+    "distributorForm"
+);
+
+const submitButton =
+document.getElementById(
+    "submitButton"
+);
+
+const successMessage =
+document.getElementById(
+    "successMessage"
+);
+
+
+/* =====================================================
+   SUBMIT FORM
+===================================================== */
+
+distributorForm.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        submitButton.disabled = true;
+
+        submitButton.textContent =
+            "APPLICATION SAVE हो रही है...";
+
+
+        /* =============================================
+           GET VALUES
+        ============================================= */
+
+        const name =
+        document.getElementById(
+            "name"
+        ).value.trim();
+
+
+        const mobile =
+        document.getElementById(
+            "mobile"
+        ).value.trim();
+
+
+        const whatsapp =
+        document.getElementById(
+            "whatsapp"
+        ).value.trim();
+
+
+        const email =
+        document.getElementById(
+            "email"
+        ).value.trim();
+
+
+        const state =
+        document.getElementById(
+            "state"
+        ).value;
+
+
+        const city =
+        document.getElementById(
+            "city"
+        ).value.trim();
+
+
+        const district =
+        document.getElementById(
+            "district"
+        ).value.trim();
+
+
+        const pincode =
+        document.getElementById(
+            "pincode"
+        ).value.trim();
+
+
+        const address =
+        document.getElementById(
+            "address"
+        ).value.trim();
+
+
+        const experience =
+        document.getElementById(
+            "experience"
+        ).value;
+
+
+        const investment =
+        document.getElementById(
+            "investment"
+        ).value;
+
+
+        /* =============================================
+           SUPABASE INSERT
+        ============================================= */
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+        .from("distributors")
+        .insert({
+
+            full_name: name,
+
+            mobile: mobile,
+
+            email: email,
+
+            address: address,
+
+            city: city,
+
+            state: state,
+
+            pincode: pincode,
+
+            experience: experience,
+
+            status: "pending",
+
+            whatsapp: whatsapp,
+
+            district: district,
+
+            investment: investment
+
+        })
+        .select()
+        .single();
+
+
+        /* =============================================
+           ERROR
+        ============================================= */
+
+        if(error){
+
+            console.error(
+                "SUPABASE ERROR:",
+                error
+            );
+
+            alert(
+                "Application save नहीं हुई।\n\n" +
+                error.message +
+                "\n\nCode: " +
+                (error.code || "-")
+            );
+
+            submitButton.disabled = false;
+
+            submitButton.textContent =
+                "APPLICATION SUBMIT करें";
+
+            return;
+        }
+
+
+        /* =============================================
+           SUCCESS
+        ============================================= */
+
+        successMessage.classList.add(
+            "show"
+        );
+
+
+        distributorForm.reset();
+
+
+        submitButton.disabled = true;
+
+        submitButton.textContent =
+            "APPLICATION SUBMITTED ✓";
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

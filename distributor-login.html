@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>NVP ROYALS | Distributor Registration</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+
+    box-sizing:border-box;
+
+    margin:0;
+
+    padding:0;
+
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body{
+
+    font-family:
+    Arial,
+    sans-serif;
+
+    background:#02091c;
+
+    color:white;
+
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page{
+
+    min-height:100vh;
+
+    padding:
+    30px 15px 60px;
+
+    background:
+
+    radial-gradient(
+        circle at top,
+        #123c83,
+        transparent 40%
+    ),
+
+    #02091c;
+
+}
+
+
+.container{
+
+    width:100%;
+
+    max-width:900px;
+
+    margin:auto;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+}
+
+
+.logo{
+
+    width:140px;
+
+    height:90px;
+
+    object-fit:contain;
+
+    margin-bottom:10px;
+
+}
+
+
+.header h1{
+
+    font-family:
+    Georgia,
+    serif;
+
+    font-size:
+    clamp(
+        30px,
+        7vw,
+        46px
+    );
+
+}
+
+
+.header h1 span{
+
+    color:#ffe58a;
+
+}
+
+
+.header p{
+
+    color:#9da8c2;
+
+    font-size:14px;
+
+    margin-top:8px;
+
+    line-height:1.6;
+
+}
+
+
+/* =====================================================
+   FORM BOX
+===================================================== */
+
+.form-box{
+
+    background:#03133f;
+
+    border:
+    1px solid
+    rgba(
+        215,
+        165,
+        34,
+        .30
+    );
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.45);
+
+}
+
+
+/* =====================================================
+   FORM GRID
+===================================================== */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:18px;
+
+}
+
+
+/* =====================================================
+   GROUP
+===================================================== */
+
+.group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+.group.full{
+
+    grid-column:
+    1 / -1;
+
+}
+
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.group label{
+
+    color:#dce3f2;
+
+    font-size:13px;
+
+    margin-bottom:7px;
+
+}
+
+
+.required{
+
+    color:#ffcf5c;
+
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+.group input,
+.group select,
+.group textarea{
+
+    width:100%;
+
+    padding:13px;
+
+    border:
+    1px solid
+    rgba(
+        215,
+        165,
+        34,
+        .30
+    );
+
+    border-radius:8px;
+
+    background:#01091f;
+
+    color:white;
+
+    outline:none;
+
+    font-size:14px;
+
+}
+
+
+.group input:focus,
+.group select:focus,
+.group textarea:focus{
+
+    border-color:#ffe58a;
+
+    box-shadow:
+    0 0 0 2px
+    rgba(
+        255,
+        229,
+        138,
+        .08
+    );
+
+}
+
+
+.group select option{
+
+    background:#03133f;
+
+    color:white;
+
+}
+
+
+.group textarea{
+
+    min-height:110px;
+
+    resize:vertical;
+
+}
+
+
+/* =====================================================
+   TERMS
+===================================================== */
+
+.terms{
+
+    grid-column:
+    1 / -1;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:10px;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    background:#020b25;
+
+    border:
+    1px solid
+    rgba(
+        255,
+        255,
+        255,
+        .05
+    );
+
+}
+
+
+.terms input{
+
+    margin-top:3px;
+
+    width:17px;
+
+    height:17px;
+
+    accent-color:#d7a522;
+
+}
+
+
+.terms label{
+
+    color:#aeb9cf;
+
+    font-size:12px;
+
+    line-height:1.6;
+
+}
+
+
+/* =====================================================
+   SUBMIT AREA
+===================================================== */
+
+.submit-area{
+
+    grid-column:
+    1 / -1;
+
+}
+
+
+.submit-button{
+
+    width:100%;
+
+    padding:15px;
+
+    border:0;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    font-size:14px;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #a8770a,
+        #ffe18a,
+        #b57c0b
+    );
+
+    color:#071027;
+
+}
+
+
+.submit-button:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}
+
+
+/* =====================================================
+   SUCCESS
+===================================================== */
+
+.success{
+
+    display:none;
+
+    margin-top:20px;
+
+    padding:18px;
+
+    border-radius:10px;
+
+    background:#123d26;
+
+    border:
+    1px solid
+    #27834b;
+
+    color:#c4ffd5;
+
+    line-height:1.7;
+
+    text-align:center;
+
+}
+
+
+.success.show{
+
+    display:block;
+
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.error{
+
+    display:none;
+
+    margin-top:20px;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    background:#441c1c;
+
+    border:
+    1px solid
+    rgba(
+        255,
+        100,
+        100,
+        .25
+    );
+
+    color:#ffd0d0;
+
+    font-size:13px;
+
+    line-height:1.6;
+
+}
+
+
+.error.show{
+
+    display:block;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+    .page{
+
+        padding:
+        25px 12px 50px;
+
+    }
+
+
+    .form-box{
+
+        padding:20px 15px;
+
+    }
+
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .group.full{
+
+        grid-column:auto;
+
+    }
+
+
+    .terms{
+
+        grid-column:auto;
+
+    }
+
+
+    .submit-area{
+
+        grid-column:auto;
+
+    }
+
+
+    .header h1{
+
+        font-size:30px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+<div class="container">
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<div class="header">
+
+
+<img
+    src="logo.png"
+    class="logo"
+    alt="NVP ROYALS"
+>
+
+
+<h1>
+
+    Distributor
+    <span>Registration</span>
+
+</h1>
+
+
+<p>
+
+    NVP ROYALS Distributor बनने के लिए
+    नीचे दी गई जानकारी भरें।
+
+</p>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     FORM BOX
+===================================================== -->
+
+<div class="form-box">
+
+
+<form
+    id="distributorForm"
+>
+
+
+<div class="form-grid">
+
+
+<!-- =================================================
+     NAME
+================================================== -->
+
+<div class="group">
+
+
+<label for="name">
+
+    पूरा नाम
+    <span class="required">*</span>
+
+</label>
+
+
+<input
+    type="text"
+    id="name"
+    placeholder="अपना पूरा नाम"
+    autocomplete="name"
+    required
+>
+
+
+</div>
+
+
+
+<!-- =================================================
+     MOBILE
+================================================== -->
+
+<div class="group">
+
+
+<label for="mobile">
+
+    Mobile Number
+    <span class="required">*</span>
+
+</label>
+
+
+<input
+    type="tel"
+    id="mobile"
+    placeholder="10 digit mobile number"
+    inputmode="numeric"
+    maxlength="10"
+    autocomplete="tel"
+    required
+>
+
+
+</div>
+
+
+
+<!-- =================================================
+     WHATSAPP
+================================================== -->
+
+<div class="group">
+
+
+<label for="whatsapp">
+
+    WhatsApp Number
+    <span class="required">*</span>
+
+</label>
+
+
+<input
+    type="tel"
+    id="whatsapp"
+    placeholder="WhatsApp number"
+    inputmode="numeric"
+    maxlength="10"
+    required
+>
+
+
+</div>
+
+
+
+<!-- =================================================
+     EMAIL
+================================================== -->
+
+<div class="group">
+
+
+<label for="email">
+
+    Email
+
+</label>
+
+
+<input
+    type="email"
+    id="email"
+    placeholder="Email address"
+    autocomplete="email"
+>
+
+
+</div>
+
+
+
+<!-- =================================================
+     STATE
+================================================== -->
+
+<div class="group">
+
+
+<label for="state">
+
+    राज्य
+    <span class="required">*</span>
+
+</label>
+
+
+<select
+    id="state"
+    required
+>
+
+
+<option value="">
+
+    राज्य चुनें
+
+</option>
+
+
+<option>
+Madhya Pradesh
+</option>
+
+
+<option>
+Rajasthan
+</option>
+
+
+<option>
+Maharashtra
+</option>
+
+
+<option>
+Gujarat
+</option>
+
+
+<option>
+Uttar Pradesh
+</option>
+
+
+<option>
+Chhattisgarh
+</option>
+
+
+<option>
+Delhi
+</option>
+
+
+<option>
+Haryana
+</option>
+
+
+<option>
+Punjab
+</option>
+
+
+<option>
+Bihar
+</option>
+
+
+<option>
+Jharkhand
+</option>
+
+
+<option>
+Other
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+<!-- =================================================
+     CITY
+================================================== -->
+
+<div class="group">
+
+
+<label for="city">
+
+    City / Town
+    <span class="required">*</span>
+
+</label>
+
+
+<input
+    type="text"
+    id="city"
+    placeholder="शहर / कस्बा"
+    required
+>
+
+
+</div>
+
+
+
+<!-- =================================================
+     DISTRICT
+================================================== -->
+
+<div class="group">
+
+
+<label for="district">
+
+    District
+    <span class="required">*</span>
+
+</label>
+
+
+<input
+    type="text"
+    id="district"
+    placeholder="जिला"
+    required
+>
+
+
+</div>
+
+
+
+<!-- =================================================
+     PINCODE
+================================================== -->
+
+<div class="group">
+
+
+<label for="pincode">
+
+    PIN Code
+    <span class="required">*</span>
+
+</label>
+
+
+<input
+    type="text"
+    id="pincode"
+    placeholder="6 digit PIN"
+    inputmode="numeric"
+    maxlength="6"
+    required
+>
+
+
+</div>
+
+
+
+<!-- =================================================
+     ADDRESS
+================================================== -->
+
+<div class="group full">
+
+
+<label for="address">
+
+    पूरा पता
+    <span class="required">*</span>
+
+</label>
+
+
+<textarea
+    id="address"
+    placeholder="Shop / Office / घर का पूरा पता"
+    required
+></textarea>
+
+
+</div>
+<!-- =================================================
+     BUSINESS NAME
+================================================== -->
+
+<div class="group">
+
+
+<label for="business">
+
+    Business / Shop Name
+
+</label>
+
+
+<input
+    type="text"
+    id="business"
+    placeholder="Business या Shop का नाम"
+>
+
+
+</div>
+
+
+
+<!-- =================================================
+     BUSINESS EXPERIENCE
+================================================== -->
+
+<div class="group">
+
+
+<label for="experience">
+
+    Business Experience
+
+</label>
+
+
+<select
+    id="experience"
+>
+
+
+<option value="">
+
+    Experience चुनें
+
+</option>
+
+
+<option value="Fresher">
+
+    Fresher
+
+</option>
+
+
+<option value="Less than 1 Year">
+
+    Less than 1 Year
+
+</option>
+
+
+<option value="1-3 Years">
+
+    1-3 Years
+
+</option>
+
+
+<option value="3-5 Years">
+
+    3-5 Years
+
+</option>
+
+
+<option value="5+ Years">
+
+    5+ Years
+
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+<!-- =================================================
+     INVESTMENT
+================================================== -->
+
+<div class="group">
+
+
+<label for="investment">
+
+    Distributor Investment Capacity
+
+</label>
+
+
+<select
+    id="investment"
+>
+
+
+<option value="">
+
+    Investment चुनें
+
+</option>
+
+
+<option value="₹10,000 - ₹25,000">
+
+    ₹10,000 - ₹25,000
+
+</option>
+
+
+<option value="₹25,000 - ₹50,000">
+
+    ₹25,000 - ₹50,000
+
+</option>
+
+
+<option value="₹50,000 - ₹1,00,000">
+
+    ₹50,000 - ₹1,00,000
+
+</option>
+
+
+<option value="₹1,00,000+">
+
+    ₹1,00,000+
+
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+<!-- =================================================
+     TERMS
+================================================== -->
+
+<div class="terms">
+
+
+<input
+    type="checkbox"
+    id="terms"
+    required
+>
+
+
+<label for="terms">
+
+    मैं पुष्टि करता/करती हूँ कि मेरे द्वारा दी गई
+    सभी जानकारी सही है और मैं NVP ROYALS की
+    Distributor Application प्रक्रिया से सहमत हूँ।
+
+</label>
+
+
+</div>
+
+
+
+<!-- =================================================
+     SUBMIT
+================================================== -->
+
+<div class="submit-area">
+
+
+<button
+    type="submit"
+    id="submitButton"
+    class="submit-button"
+>
+
+    SUBMIT APPLICATION
+
+</button>
+
+
+</div>
+
+
+
+<!-- =================================================
+     SUCCESS MESSAGE
+================================================== -->
+
+<div
+    id="successMessage"
+    class="success"
+>
+
+    <strong>
+        Application Successfully Submitted ✓
+    </strong>
+
+    <br><br>
+
+    आपकी Distributor Application
+    successfully submit हो गई है।
+
+    <br>
+
+    आपकी application अभी
+    <strong>PENDING</strong> है।
+
+    <br>
+
+    Approval के बाद NVP ROYALS की team
+    आगे की जानकारी देगी।
+
+</div>
+
+
+
+<!-- =================================================
+     ERROR MESSAGE
+================================================== -->
+
+<div
+    id="errorMessage"
+    class="error"
+></div>
+
+
+</div>
+
+
+</form>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+    "https://pybpdlubitlzlkmaohpw.supabase.co";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_Cki1_BdfpPeoU2yBgr1zIw_Ra7BqCwX";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const distributorForm =
+    document.getElementById(
+        "distributorForm"
+    );
+
+
+const submitButton =
+    document.getElementById(
+        "submitButton"
+    );
+
+
+const successMessage =
+    document.getElementById(
+        "successMessage"
+    );
+
+
+const errorMessage =
+    document.getElementById(
+        "errorMessage"
+    );
+
+
+
+/* =====================================================
+   SUBMIT FORM
+===================================================== */
+
+distributorForm.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        /* =========================================
+           HIDE OLD MESSAGES
+        ========================================= */
+
+        successMessage.classList.remove(
+            "show"
+        );
+
+
+        errorMessage.classList.remove(
+            "show"
+        );
+
+
+        errorMessage.textContent =
+            "";
+
+
+        /* =========================================
+           BUTTON
+        ========================================= */
+
+        submitButton.disabled =
+            true;
+
+
+        submitButton.textContent =
+            "APPLICATION SUBMIT हो रही है...";
+
+
+        /* =========================================
+           GET FORM DATA
+        ========================================= */
+
+        const name =
+            document
+            .getElementById("name")
+            .value
+            .trim();
+
+
+        const business =
+            document
+            .getElementById("business")
+            .value
+            .trim();
+
+
+        const mobile =
+            document
+            .getElementById("mobile")
+            .value
+            .trim();
+
+
+        const whatsapp =
+            document
+            .getElementById("whatsapp")
+            .value
+            .trim();
+
+
+        const email =
+            document
+            .getElementById("email")
+            .value
+            .trim();
+
+
+        const state =
+            document
+            .getElementById("state")
+            .value;
+
+
+        const city =
+            document
+            .getElementById("city")
+            .value
+            .trim();
+
+
+        const district =
+            document
+            .getElementById("district")
+            .value
+            .trim();
+
+
+        const pincode =
+            document
+            .getElementById("pincode")
+            .value
+            .trim();
+
+
+        const address =
+            document
+            .getElementById("address")
+            .value
+            .trim();
+
+
+        const experience =
+            document
+            .getElementById("experience")
+            .value;
+
+
+        const investment =
+            document
+            .getElementById("investment")
+            .value;
+
+
+        /* =========================================
+           VALIDATION
+        ========================================= */
+
+        if(
+            !name ||
+            !mobile ||
+            !whatsapp ||
+            !state ||
+            !city ||
+            !district ||
+            !pincode ||
+            !address
+        ){
+
+            showError(
+                "कृपया सभी जरूरी जानकारी भरें।"
+            );
+
+
+            resetSubmitButton();
+
+
+            return;
+
+        }
+
+
+        /* =========================================
+           MOBILE VALIDATION
+        ========================================= */
+
+        if(!/^[0-9]{10}$/.test(mobile)){
+
+            showError(
+                "Mobile Number 10 digit का होना चाहिए।"
+            );
+
+
+            resetSubmitButton();
+
+
+            return;
+
+        }
+
+
+        /* =========================================
+           WHATSAPP VALIDATION
+        ========================================= */
+
+        if(!/^[0-9]{10}$/.test(whatsapp)){
+
+            showError(
+                "WhatsApp Number 10 digit का होना चाहिए।"
+            );
+
+
+            resetSubmitButton();
+
+
+            return;
+
+        }
+
+
+        /* =========================================
+           PINCODE VALIDATION
+        ========================================= */
+
+        if(!/^[0-9]{6}$/.test(pincode)){
+
+            showError(
+                "PIN Code 6 digit का होना चाहिए।"
+            );
+
+
+            resetSubmitButton();
+
+
+            return;
+
+        }
+
+
+        /* =========================================
+           SUPABASE INSERT
+        ========================================= */
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+        .from("distributors")
+        .insert({
+
+            full_name:
+                name,
+
+            business_name:
+                business || null,
+
+            mobile:
+                mobile,
+
+            whatsapp:
+                whatsapp,
+
+            email:
+                email || null,
+
+            state:
+                state,
+
+            city:
+                city,
+
+            district:
+                district,
+
+            pincode:
+                pincode,
+
+            address:
+                address,
+
+            experience:
+                experience || null,
+
+            investment:
+                investment || null,
+
+            status:
+                "pending"
+
+        })
+        .select()
+        .single();
+
+
+        /* =========================================
+           ERROR
+        ========================================= */
+
+        if(error){
+
+            console.error(
+                "SUPABASE ERROR:",
+                error
+            );
+
+
+            showError(
+                "Application submit नहीं हो सकी।\n\n" +
+                error.message
+            );
+
+
+            resetSubmitButton();
+
+
+            return;
+
+        }
+
+
+        /* =========================================
+           SUCCESS
+        ========================================= */
+
+        successMessage.classList.add(
+            "show"
+        );
+
+
+        distributorForm.reset();
+
+
+        submitButton.disabled =
+            true;
+
+
+        submitButton.textContent =
+            "APPLICATION SUBMITTED ✓";
+
+
+        /* =========================================
+           IMPORTANT
+           NO WHATSAPP CODE HERE
+        ========================================= */
+
+    }
+);
+
+
+
+/* =====================================================
+   SHOW ERROR
+===================================================== */
+
+function showError(message){
+
+    errorMessage.textContent =
+        message;
+
+    errorMessage.classList.add(
+        "show"
+    );
+
+}
+
+
+
+/* =====================================================
+   RESET BUTTON
+===================================================== */
+
+function resetSubmitButton(){
+
+    submitButton.disabled =
+        false;
+
+    submitButton.textContent =
+        "SUBMIT APPLICATION";
+
+}
+
+
+
+/* =====================================================
+   END
+===================================================== */
+
+</script>
+
+</body>
+
+</html>

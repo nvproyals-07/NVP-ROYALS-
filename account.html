@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>My Account | NVP ROYALS</title>
+
+<meta
+    name="description"
+    content="NVP ROYALS customer profile"
+>
+
+<link
+    rel="icon"
+    type="image/png"
+    href="logo.png"
+>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:Arial,sans-serif;
+
+    background:#02091c;
+
+    color:#fff;
+
+    min-height:100vh;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+
+    background:#02091c;
+
+    border-bottom:
+    1px solid
+    rgba(255,229,138,.2);
+
+}
+
+.navbar{
+
+    max-width:1100px;
+
+    min-height:70px;
+
+    margin:auto;
+
+    padding:
+    10px 18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+}
+
+.logo-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+.logo-box img{
+
+    width:50px;
+
+    height:50px;
+
+    object-fit:contain;
+
+}
+
+.logo-text{
+
+    color:#ffe58a;
+
+    font-family:Georgia,serif;
+
+    font-size:19px;
+
+    font-weight:bold;
+
+}
+
+.back-btn{
+
+    padding:
+    9px 14px;
+
+    border:
+    1px solid
+    rgba(255,229,138,.4);
+
+    border-radius:7px;
+
+    color:#ffe58a;
+
+    text-decoration:none;
+
+    font-size:13px;
+
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page{
+
+    width:100%;
+
+    padding:
+    45px 15px 70px;
+
+}
+
+.container{
+
+    width:100%;
+
+    max-width:850px;
+
+    margin:auto;
+
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.title{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.title h1{
+
+    font-family:Georgia,serif;
+
+    font-size:
+    clamp(30px,6vw,45px);
+
+}
+
+.title h1 span{
+
+    color:#ffe58a;
+
+}
+
+.title p{
+
+    margin-top:8px;
+
+    color:#8f9bb3;
+
+    font-size:13px;
+
+}
+
+
+/* =====================================================
+   PROFILE CARD
+===================================================== */
+
+.profile-card{
+
+    background:#03133f;
+
+    border:
+    1px solid
+    rgba(215,165,34,.3);
+
+    border-radius:18px;
+
+    padding:
+    30px 25px;
+
+    box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.35);
+
+}
+
+
+/* =====================================================
+   PROFILE AVATAR
+===================================================== */
+
+.avatar-section{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.avatar{
+
+    width:100px;
+
+    height:100px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    overflow:hidden;
+
+    background:
+    radial-gradient(
+        circle,
+        #123c83,
+        #071b4d
+    );
+
+    border:
+    2px solid
+    #ffe58a;
+
+}
+
+.avatar img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+.avatar-letter{
+
+    color:#ffe58a;
+
+    font-family:Georgia,serif;
+
+    font-size:38px;
+
+    font-weight:bold;
+
+}
+
+.avatar-section p{
+
+    margin-top:10px;
+
+    color:#8996b0;
+
+    font-size:12px;
+
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:18px;
+
+}
+
+.field{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:7px;
+
+}
+
+.field.full{
+
+    grid-column:
+    1 / -1;
+
+}
+
+label{
+
+    color:#dce3f2;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+}
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:
+    12px 13px;
+
+    border:
+    1px solid
+    rgba(255,229,138,.2);
+
+    border-radius:8px;
+
+    background:#02091c;
+
+    color:#fff;
+
+    outline:none;
+
+    font-family:Arial,sans-serif;
+
+    font-size:13px;
+
+    transition:
+    border-color .2s ease,
+    box-shadow .2s ease;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:#ffe58a;
+
+    box-shadow:
+    0 0 0 2px
+    rgba(255,229,138,.08);
+
+}
+
+input:disabled{
+
+    opacity:.65;
+
+    cursor:not-allowed;
+
+}
+
+textarea{
+
+    min-height:100px;
+
+    resize:vertical;
+
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.actions{
+
+    margin-top:25px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+}
+
+.btn{
+
+    border:0;
+
+    border-radius:8px;
+
+    padding:
+    13px 22px;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:
+    transform .15s ease,
+    opacity .15s ease;
+
+}
+
+.btn:active{
+
+    transform:scale(.95);
+
+}
+
+.save-btn{
+
+    background:
+    linear-gradient(
+        135deg,
+        #a8770a,
+        #ffe18a,
+        #b57c0b
+    );
+
+    color:#071027;
+
+}
+
+.logout-btn{
+
+    background:#7d2028;
+
+    color:#fff;
+
+}
+
+.btn:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.message{
+
+    display:none;
+
+    margin-bottom:20px;
+
+    padding:
+    12px 14px;
+
+    border-radius:8px;
+
+    text-align:center;
+
+    font-size:13px;
+
+}
+
+.message.success{
+
+    display:block;
+
+    background:
+    rgba(31,130,75,.18);
+
+    border:
+    1px solid
+    rgba(80,200,120,.35);
+
+    color:#8ff0b1;
+
+}
+
+.message.error{
+
+    display:block;
+
+    background:
+    rgba(150,30,40,.18);
+
+    border:
+    1px solid
+    rgba(255,80,90,.35);
+
+    color:#ff9ba2;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    padding:
+    25px 15px;
+
+    text-align:center;
+
+    background:#010613;
+
+    border-top:
+    1px solid
+    rgba(255,255,255,.06);
+
+}
+
+.footer-brand{
+
+    color:#ffe58a;
+
+    font-family:Georgia,serif;
+
+    font-weight:bold;
+
+}
+
+footer p{
+
+    margin-top:5px;
+
+    color:#77839c;
+
+    font-size:11px;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:650px){
+
+    .navbar{
+
+        min-height:62px;
+
+        padding:
+        8px 12px;
+
+    }
+
+    .logo-box img{
+
+        width:43px;
+
+        height:43px;
+
+    }
+
+    .logo-text{
+
+        font-size:16px;
+
+    }
+
+    .back-btn{
+
+        padding:
+        8px 10px;
+
+        font-size:11px;
+
+    }
+
+    .page{
+
+        padding:
+        35px 12px 55px;
+
+    }
+
+    .profile-card{
+
+        padding:
+        25px 15px;
+
+    }
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .field.full{
+
+        grid-column:auto;
+
+    }
+
+    .actions{
+
+        flex-direction:column;
+
+    }
+
+    .btn{
+
+        width:100%;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+<nav class="navbar">
+
+<a
+    href="index.html"
+    class="logo-box"
+>
+
+<img
+    src="logo.png"
+    alt="NVP ROYALS Logo"
+>
+
+<div class="logo-text">
+NVP ROYALS
+</div>
+
+</a>
+
+
+<a
+    href="index.html"
+    class="back-btn"
+>
+
+← Home
+
+</a>
+
+</nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="page">
+
+<div class="container">
+
+
+<div class="title">
+
+<h1>
+My <span>Profile</span>
+</h1>
+
+<p>
+अपनी customer profile की जानकारी यहाँ update करें।
+</p>
+
+</div>
+
+
+
+<div
+    id="message"
+    class="message"
+></div>
+
+
+
+<div class="profile-card">
+
+
+<!-- AVATAR -->
+
+<div class="avatar-section">
+
+<div class="avatar">
+
+<div
+    id="avatarLetter"
+    class="avatar-letter"
+>
+N
+</div>
+
+</div>
+
+<p>
+Customer Profile
+</p>
+
+</div>
+
+
+
+<!-- FORM -->
+
+<form id="profileForm">
+
+
+<div class="form-grid">
+
+
+<!-- FULL NAME -->
+
+<div class="field">
+
+<label for="fullName">
+Full Name
+</label>
+
+<input
+    type="text"
+    id="fullName"
+    placeholder="अपना पूरा नाम"
+    autocomplete="name"
+>
+
+</div>
+
+
+
+<!-- EMAIL -->
+
+<div class="field">
+
+<label for="email">
+Email
+</label>
+
+<input
+    type="email"
+    id="email"
+    disabled
+>
+
+</div>
+
+
+
+<!-- PHONE -->
+
+<div class="field">
+
+<label for="phone">
+Phone Number
+</label>
+
+<input
+    type="tel"
+    id="phone"
+    placeholder="Mobile number"
+    autocomplete="tel"
+>
+
+</div>
+
+
+
+<!-- DATE OF BIRTH -->
+
+<div class="field">
+
+<label for="dateOfBirth">
+Date of Birth
+</label>
+
+<input
+    type="date"
+    id="dateOfBirth"
+>
+
+</div>
+
+
+
+<!-- GENDER -->
+
+<div class="field">
+
+<label for="gender">
+Gender
+</label>
+
+<select id="gender">
+
+<option value="">
+Select Gender
+</option>
+
+<option value="Male">
+Male
+</option>
+
+<option value="Female">
+Female
+</option>
+
+<option value="Other">
+Other
+</option>
+
+<option value="Prefer not to say">
+Prefer not to say
+</option>
+
+</select>
+
+</div>
+
+
+
+<!-- PIN -->
+
+<div class="field">
+
+<label for="pinCode">
+PIN Code
+</label>
+
+<input
+    type="text"
+    id="pinCode"
+    inputmode="numeric"
+    maxlength="6"
+    placeholder="PIN Code"
+>
+
+</div>
+
+
+
+<!-- ADDRESS -->
+
+<div class="field full">
+
+<label for="address">
+Address
+</label>
+
+<textarea
+    id="address"
+    placeholder="अपना पूरा address"
+></textarea>
+
+</div>
+
+
+
+<!-- CITY -->
+
+<div class="field">
+
+<label for="city">
+City
+</label>
+
+<input
+    type="text"
+    id="city"
+    placeholder="City"
+>
+
+</div>
+
+
+
+<!-- STATE -->
+
+<div class="field">
+
+<label for="state">
+State
+</label>
+
+<input
+    type="text"
+    id="state"
+    placeholder="State"
+>
+
+</div>
+
+
+
+</div>
+
+
+
+<!-- ACTIONS -->
+
+<div class="actions">
+
+<button
+    type="submit"
+    id="saveBtn"
+    class="btn save-btn"
+>
+
+Save Profile
+
+</button>
+
+
+<button
+    type="button"
+    id="logoutBtn"
+    class="btn logout-btn"
+>
+
+Logout
+
+</button>
+
+</div>
+
+
+</form>
+
+
+</div>
+
+</div>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+<div class="footer-brand">
+NVP ROYALS
+</div>
+
+<p>
+Legacy of Purity
+</p>
+
+<p>
+© 2026 NVP ROYALS. All Rights Reserved.
+</p>
+
+</footer>
+
+
+
+<!-- =====================================================
+     SUPABASE PROFILE SYSTEM
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   SUPABASE CONFIG
+===================================================== */
+
+const SUPABASE_URL =
+"https://pybpdlubitlzlkmaohpw.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_Cki1_BdfpPeoU2yBgr1zIw_Ra7BqCwX";
+
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const form =
+document.getElementById(
+    "profileForm"
+);
+
+const saveBtn =
+document.getElementById(
+    "saveBtn"
+);
+
+const logoutBtn =
+document.getElementById(
+    "logoutBtn"
+);
+
+const message =
+document.getElementById(
+    "message"
+);
+
+const avatarLetter =
+document.getElementById(
+    "avatarLetter"
+);
+
+
+
+/* =====================================================
+   SHOW MESSAGE
+===================================================== */
+
+function showMessage(
+    text,
+    type
+){
+
+    message.textContent =
+        text;
+
+    message.className =
+        "message " + type;
+
+}
+
+
+
+/* =====================================================
+   HIDE MESSAGE
+===================================================== */
+
+function hideMessage(){
+
+    message.textContent = "";
+
+    message.className =
+        "message";
+
+}
+
+
+
+/* =====================================================
+   LOAD PROFILE
+===================================================== */
+
+async function loadProfile(){
+
+    hideMessage();
+
+
+    const {
+        data: sessionData,
+        error: sessionError
+    } =
+    await supabaseClient
+    .auth
+    .getSession();
+
+
+    if(
+        sessionError ||
+        !sessionData.session
+    ){
+
+        window.location.replace(
+            "login.html"
+        );
+
+        return;
+
+    }
+
+
+    const user =
+        sessionData.session.user;
+
+
+    /*
+       Email Auth / Google Auth
+    */
+
+    document.getElementById(
+        "email"
+    ).value =
+        user.email || "";
+
+
+    /*
+       Google से नाम मिलने की कोशिश
+    */
+
+    const googleName =
+        user.user_metadata?.full_name ||
+        user.user_metadata?.name ||
+        "";
+
+
+    /*
+       Existing profile
+    */
+
+    const {
+        data: profile,
+        error
+    } =
+    await supabaseClient
+    .from("profiles")
+    .select("*")
+    .eq("id", user.id)
+    .maybeSingle();
+
+
+    if(error){
+
+        console.error(
+            "Profile load error:",
+            error
+        );
+
+        showMessage(
+            "Profile load नहीं हो पाई।",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Profile मौजूद है
+    */
+
+    if(profile){
+
+        document.getElementById(
+            "fullName"
+        ).value =
+            profile.full_name || "";
+
+
+        document.getElementById(
+            "phone"
+        ).value =
+            profile.phone || "";
+
+
+        document.getElementById(
+            "dateOfBirth"
+        ).value =
+            profile.date_of_birth || "";
+
+
+        document.getElementById(
+            "gender"
+        ).value =
+            profile.gender || "";
+
+
+        document.getElementById(
+            "address"
+        ).value =
+            profile.address || "";
+
+
+        document.getElementById(
+            "city"
+        ).value =
+            profile.city || "";
+
+
+        document.getElementById(
+            "state"
+        ).value =
+            profile.state || "";
+
+
+        document.getElementById(
+            "pinCode"
+        ).value =
+            profile.pin_code || "";
+
+
+    }else{
+
+        /*
+           पहली बार profile
+           Google metadata से name
+        */
+
+        document.getElementById(
+            "fullName"
+        ).value =
+            googleName;
+
+    }
+
+
+    updateAvatar();
+
+}
+
+
+
+/* =====================================================
+   AVATAR LETTER
+===================================================== */
+
+function updateAvatar(){
+
+    const name =
+    document.getElementById(
+        "fullName"
+    ).value.trim();
+
+
+    if(!name){
+
+        avatarLetter.textContent =
+            "N";
+
+        return;
+
+    }
+
+
+    avatarLetter.textContent =
+        name
+        .charAt(0)
+        .toUpperCase();
+
+}
+
+
+
+/* =====================================================
+   NAME CHANGE
+===================================================== */
+
+document.getElementById(
+    "fullName"
+).addEventListener(
+    "input",
+    updateAvatar
+);
+
+
+
+/* =====================================================
+   SAVE PROFILE
+===================================================== */
+
+form.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+        hideMessage();
+
+
+        saveBtn.disabled = true;
+
+        saveBtn.textContent =
+            "Saving...";
+
+
+        try{
+
+
+            const {
+                data: sessionData,
+                error: sessionError
+            } =
+            await supabaseClient
+            .auth
+            .getSession();
+
+
+            if(
+                sessionError ||
+                !sessionData.session
+            ){
+
+                window.location.replace(
+                    "login.html"
+                );
+
+                return;
+
+            }
+
+
+            const user =
+                sessionData.session.user;
+
+
+            const profileData = {
+
+                id:user.id,
+
+                full_name:
+                document.getElementById(
+                    "fullName"
+                ).value.trim() || null,
+
+                phone:
+                document.getElementById(
+                    "phone"
+                ).value.trim() || null,
+
+                date_of_birth:
+                document.getElementById(
+                    "dateOfBirth"
+                ).value || null,
+
+                gender:
+                document.getElementById(
+                    "gender"
+                ).value || null,
+
+                address:
+                document.getElementById(
+                    "address"
+                ).value.trim() || null,
+
+                city:
+                document.getElementById(
+                    "city"
+                ).value.trim() || null,
+
+                state:
+                document.getElementById(
+                    "state"
+                ).value.trim() || null,
+
+                pin_code:
+                document.getElementById(
+                    "pinCode"
+                ).value.trim() || null,
+
+                updated_at:
+                new Date().toISOString()
+
+            };
+
+
+            /*
+               Upsert:
+               profile नहीं है तो create
+               है तो update
+            */
+
+            const {
+                error
+            } =
+            await supabaseClient
+            .from("profiles")
+            .upsert(
+                profileData,
+                {
+                    onConflict:"id"
+                }
+            );
+
+
+            if(error){
+
+                console.error(
+                    "Profile save error:",
+                    error
+                );
+
+                showMessage(
+                    "Profile save नहीं हुई: " +
+                    error.message,
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            showMessage(
+                "Profile successfully save हो गई।",
+                "success"
+            );
+
+
+            updateAvatar();
+
+
+        }catch(error){
+
+            console.error(error);
+
+            showMessage(
+                "कुछ समस्या हुई। फिर से कोशिश करें।",
+                "error"
+            );
+
+        }finally{
+
+            saveBtn.disabled = false;
+
+            saveBtn.textContent =
+                "Save Profile";
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+logoutBtn.addEventListener(
+    "click",
+    async function(){
+
+        logoutBtn.disabled = true;
+
+        logoutBtn.textContent =
+            "Logging out...";
+
+
+        const {
+            error
+        } =
+        await supabaseClient
+        .auth
+        .signOut();
+
+
+        if(error){
+
+            console.error(error);
+
+            showMessage(
+                "Logout नहीं हो पाया।",
+                "error"
+            );
+
+            logoutBtn.disabled = false;
+
+            logoutBtn.textContent =
+                "Logout";
+
+            return;
+
+        }
+
+
+        window.location.replace(
+            "login.html"
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+loadProfile();
+
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+supabaseClient
+.auth
+.onAuthStateChange(
+    function(
+        event,
+        session
+    ){
+
+        if(
+            event === "SIGNED_OUT" ||
+            !session
+        ){
+
+            window.location.replace(
+                "login.html"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

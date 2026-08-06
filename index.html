@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>NVP ROYALS | Legacy of Purity</title>
+
+<meta
+    name="description"
+    content="NVP ROYALS — Legacy of Purity. Explore our products, learn about our brand, and become a distributor."
+>
+
+<link
+    rel="icon"
+    type="image/png"
+    href="logo.png"
+>
+
+
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:Arial,sans-serif;
+
+    background:#02091c;
+
+    color:white;
+
+    overflow-x:hidden;
+
+}
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+    -webkit-tap-highlight-color:transparent;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+
+    width:100%;
+
+    background:#02091c;
+
+    border-bottom:
+    1px solid
+    rgba(255,229,138,.2);
+
+    position:relative;
+
+    z-index:100;
+
+}
+
+.navbar{
+
+    width:100%;
+
+    max-width:1150px;
+
+    min-height:75px;
+
+    margin:auto;
+
+    padding:
+    10px 18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    flex-shrink:0;
+
+}
+
+.logo-box img{
+
+    width:55px;
+
+    height:55px;
+
+    object-fit:contain;
+
+}
+
+.logo-text{
+
+    font-family:Georgia,serif;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    color:#ffe58a;
+
+    letter-spacing:.5px;
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.menu{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+}
+
+.menu a{
+
+    color:#dce3f2;
+
+    font-size:14px;
+
+    transition:
+    color .2s ease,
+    transform .2s ease;
+
+}
+
+.menu a:hover{
+
+    color:#ffe58a;
+
+    transform:
+    translateY(-2px);
+
+}
+
+
+/* =====================================================
+   DISTRIBUTOR BUTTON
+===================================================== */
+
+.menu .distributor{
+
+    padding:
+    10px 15px;
+
+    border-radius:7px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #a8770a,
+        #ffe18a,
+        #b57c0b
+    );
+
+    color:#071027;
+
+    font-weight:bold;
+
+}
+
+
+/* =====================================================
+   MY PROFILE BUTTON
+===================================================== */
+
+.profile-btn{
+
+    padding:
+    9px 13px;
+
+    border-radius:7px;
+
+    border:
+    1px solid
+    rgba(255,229,138,.45);
+
+    background:
+    rgba(255,255,255,.03);
+
+    color:#ffe58a !important;
+
+    font-size:12px !important;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+/* =====================================================
+   LOGOUT BUTTON
+===================================================== */
+
+.logout-btn{
+
+    padding:
+    9px 13px;
+
+    border:0;
+
+    border-radius:7px;
+
+    background:#7d2028;
+
+    color:#fff;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:
+    transform .15s ease,
+    background .15s ease;
+
+}
+
+.logout-btn:hover{
+
+    background:#a42a35;
+
+    transform:
+    translateY(-2px);
+
+}
+
+.logout-btn:active{
+
+    transform:scale(.94);
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+
+    min-height:
+    calc(100vh - 75px);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    padding:
+    70px 15px;
+
+    background:
+
+    radial-gradient(
+        circle at top,
+        #123c83,
+        transparent 45%
+    ),
+
+    #02091c;
+
+}
+
+.hero-content{
+
+    width:100%;
+
+    max-width:850px;
+
+    margin:auto;
+
+}
+
+.hero-logo{
+
+    width:
+    clamp(
+        110px,
+        25vw,
+        170px
+    );
+
+    height:auto;
+
+    object-fit:contain;
+
+    margin-bottom:20px;
+
+    filter:
+    drop-shadow(
+        0 10px 25px
+        rgba(0,0,0,.4)
+    );
+
+}
+
+.hero h1{
+
+    font-family:Georgia,serif;
+
+    font-size:
+    clamp(
+        38px,
+        8vw,
+        70px
+    );
+
+    line-height:1.1;
+
+    letter-spacing:.5px;
+
+}
+
+.hero h1 span{
+
+    color:#ffe58a;
+
+}
+
+.tagline{
+
+    margin-top:15px;
+
+    color:#ffe58a;
+
+    font-family:Georgia,serif;
+
+    font-size:
+    clamp(
+        18px,
+        4vw,
+        25px
+    );
+
+    letter-spacing:1px;
+
+}
+
+.hero-description{
+
+    max-width:650px;
+
+    margin:
+    18px auto 0;
+
+    color:#aeb9d0;
+
+    font-size:15px;
+
+    line-height:1.8;
+
+}
+
+
+/* =====================================================
+   HERO BUTTONS
+===================================================== */
+
+.hero-buttons{
+
+    margin-top:30px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:13px;
+
+}
+
+.btn{
+
+    display:inline-block;
+
+    padding:
+    13px 22px;
+
+    border-radius:8px;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    transition:
+    transform .15s ease,
+    box-shadow .15s ease;
+
+}
+
+.btn:active{
+
+    transform:scale(.94);
+
+}
+
+.btn-primary{
+
+    background:
+    linear-gradient(
+        135deg,
+        #a8770a,
+        #ffe18a,
+        #b57c0b
+    );
+
+    color:#071027;
+
+}
+
+.btn-secondary{
+
+    border:
+    1px solid
+    rgba(255,229,138,.5);
+
+    color:#ffe58a;
+
+    background:
+    rgba(255,255,255,.03);
+
+}
+
+.btn:hover{
+
+    transform:
+    translateY(-3px);
+
+}
+
+
+/* =====================================================
+   QUICK OPTIONS
+===================================================== */
+
+.options-section{
+
+    padding:
+    65px 15px;
+
+    background:#02091c;
+
+}
+
+.container{
+
+    width:100%;
+
+    max-width:1050px;
+
+    margin:auto;
+
+}
+
+.section-title{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.section-title h2{
+
+    font-family:Georgia,serif;
+
+    font-size:
+    clamp(
+        28px,
+        6vw,
+        40px
+    );
+
+}
+
+.section-title h2 span{
+
+    color:#ffe58a;
+
+}
+
+.section-title p{
+
+    margin-top:8px;
+
+    color:#8996b0;
+
+    font-size:13px;
+
+}
+
+
+/* =====================================================
+   OPTION CARDS
+===================================================== */
+
+.options-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:16px;
+
+}
+
+.option-card{
+
+    display:block;
+
+    padding:
+    25px 15px;
+
+    text-align:center;
+
+    background:#03133f;
+
+    border:
+    1px solid
+    rgba(215,165,34,.25);
+
+    border-radius:14px;
+
+    transition:
+    transform .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+
+}
+
+.option-card:hover{
+
+    transform:
+    translateY(-5px);
+
+    border-color:#ffe58a;
+
+    box-shadow:
+    0 15px 35px
+    rgba(0,0,0,.3);
+
+}
+
+.option-card:active{
+
+    transform:scale(.95);
+
+}
+
+.option-icon{
+
+    width:55px;
+
+    height:55px;
+
+    margin:
+    0 auto 13px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        #123c83,
+        #071b4d
+    );
+
+    color:#ffe58a;
+
+    font-size:21px;
+
+    font-weight:bold;
+
+}
+
+.option-card h3{
+
+    font-family:Georgia,serif;
+
+    font-size:18px;
+
+    margin-bottom:7px;
+
+}
+
+.option-card p{
+
+    color:#8f9bb3;
+
+    font-size:12px;
+
+    line-height:1.6;
+
+}
+
+
+/* =====================================================
+   DISTRIBUTOR CTA
+===================================================== */
+
+.distributor-section{
+
+    padding:
+    65px 15px;
+
+    background:
+
+    radial-gradient(
+        circle at center,
+        #0b2b63,
+        transparent 55%
+    ),
+
+    #02091c;
+
+}
+
+.distributor-box{
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:
+    40px 25px;
+
+    text-align:center;
+
+    background:#03133f;
+
+    border:
+    1px solid
+    rgba(215,165,34,.35);
+
+    border-radius:18px;
+
+    box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.35);
+
+}
+
+.distributor-box h2{
+
+    font-family:Georgia,serif;
+
+    font-size:
+    clamp(
+        27px,
+        6vw,
+        40px
+    );
+
+}
+
+.distributor-box h2 span{
+
+    color:#ffe58a;
+
+}
+
+.distributor-box p{
+
+    max-width:650px;
+
+    margin:
+    13px auto 25px;
+
+    color:#9da8c2;
+
+    font-size:14px;
+
+    line-height:1.8;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    padding:
+    32px 15px;
+
+    background:#010613;
+
+    border-top:
+    1px solid
+    rgba(255,255,255,.06);
+
+    text-align:center;
+
+}
+
+.footer-brand{
+
+    color:#ffe58a;
+
+    font-family:Georgia,serif;
+
+    font-size:21px;
+
+    font-weight:bold;
+
+}
+
+footer p{
+
+    color:#77839c;
+
+    font-size:12px;
+
+    margin-top:5px;
+
+    line-height:1.6;
+
+}
+
+.footer-links{
+
+    margin-top:16px;
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:17px;
+
+}
+
+.footer-links a{
+
+    color:#9da8c2;
+
+    font-size:12px;
+
+    transition:
+    color .2s ease;
+
+}
+
+.footer-links a:hover{
+
+    color:#ffe58a;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:800px){
+
+    .options-grid{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+}
+
+
+@media(max-width:650px){
+
+    .navbar{
+
+        min-height:65px;
+
+        padding:
+        9px 12px;
+
+    }
+
+    .logo-box img{
+
+        width:45px;
+
+        height:45px;
+
+    }
+
+    .logo-text{
+
+        font-size:17px;
+
+    }
+
+    .menu{
+
+        gap:5px;
+
+    }
+
+    .menu > a:not(.distributor):not(.profile-btn){
+
+        display:none;
+
+    }
+
+    .menu .distributor{
+
+        display:block;
+
+        padding:
+        8px 9px;
+
+        font-size:10px;
+
+    }
+
+    .profile-btn{
+
+        display:block;
+
+        padding:
+        8px 9px;
+
+        font-size:10px !important;
+
+    }
+
+    .logout-btn{
+
+        display:block;
+
+        padding:
+        8px 9px;
+
+        font-size:10px;
+
+    }
+
+    .hero{
+
+        min-height:
+        calc(100vh - 65px);
+
+        padding:
+        55px 14px;
+
+    }
+
+    .hero-description{
+
+        font-size:13px;
+
+    }
+
+    .hero-buttons{
+
+        flex-direction:column;
+
+        width:100%;
+
+        max-width:320px;
+
+        margin-left:auto;
+
+        margin-right:auto;
+
+    }
+
+    .btn{
+
+        width:100%;
+
+        text-align:center;
+
+    }
+
+    .options-section,
+    .distributor-section{
+
+        padding:
+        50px 13px;
+
+    }
+
+    .options-grid{
+
+        grid-template-columns:
+        1fr 1fr;
+
+        gap:11px;
+
+    }
+
+    .option-card{
+
+        padding:
+        20px 10px;
+
+    }
+
+    .option-card h3{
+
+        font-size:16px;
+
+    }
+
+    .option-card p{
+
+        font-size:11px;
+
+    }
+
+    .distributor-box{
+
+        padding:
+        32px 17px;
+
+    }
+
+}
+
+
+@media(max-width:380px){
+
+    .options-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+/* =====================================================
+   CLICK ANIMATION
+===================================================== */
+
+a:active{
+
+    transform:scale(.96);
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+<nav class="navbar">
+
+
+<a
+    href="index.html"
+    class="logo-box"
+>
+
+<img
+    src="logo.png"
+    alt="NVP ROYALS Logo"
+>
+
+<div class="logo-text">
+NVP ROYALS
+</div>
+
+</a>
+
+
+<div class="menu">
+
+
+<a
+    href="index.html"
+>
+Home
+</a>
+
+
+<a
+    href="products.html"
+>
+Products
+</a>
+
+
+<a
+    href="about.html"
+>
+About
+</a>
+
+
+<a
+    href="contact.html"
+>
+Contact
+</a>
+
+
+<a
+    href="distributor.html"
+    class="distributor"
+>
+Distributor
+</a>
+
+
+<!-- =================================================
+     MY PROFILE
+================================================= -->
+
+<a
+    href="account.html"
+    id="profileBtn"
+    class="profile-btn"
+>
+My Profile
+</a>
+
+
+<!-- =================================================
+     LOGOUT
+================================================= -->
+
+<button
+    type="button"
+    id="logoutBtn"
+    class="logout-btn"
+>
+Logout
+</button>
+
+
+</div>
+
+</nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+
+<img
+    src="logo.png"
+    class="hero-logo"
+    alt="NVP ROYALS"
+>
+
+
+<h1>
+
+NVP
+<span>ROYALS</span>
+
+</h1>
+
+
+<div class="tagline">
+
+Legacy of Purity
+
+</div>
+
+
+<p class="hero-description">
+
+परंपरा, गुणवत्ता और शुद्धता के साथ
+NVP ROYALS आपके लिए भरोसेमंद
+products लेकर आता है।
+
+</p>
+
+
+<div class="hero-buttons">
+
+
+<a
+    href="products.html"
+    class="btn btn-primary"
+>
+
+Explore Products
+
+</a>
+
+
+<a
+    href="about.html"
+    class="btn btn-secondary"
+>
+
+About NVP ROYALS
+
+</a>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     QUICK OPTIONS
+===================================================== -->
+
+<section class="options-section">
+
+<div class="container">
+
+
+<div class="section-title">
+
+<h2>
+
+Explore
+<span>NVP ROYALS</span>
+
+</h2>
+
+<p>
+
+हमारी website के मुख्य sections
+
+</p>
+
+</div>
+
+
+<div class="options-grid">
+
+
+<!-- PRODUCTS -->
+
+<a
+    href="products.html"
+    class="option-card"
+>
+
+<div class="option-icon">
+P
+</div>
+
+<h3>
+Products
+</h3>
+
+<p>
+हमारे products देखें
+</p>
+
+</a>
+
+
+
+<!-- ABOUT -->
+
+<a
+    href="about.html"
+    class="option-card"
+>
+
+<div class="option-icon">
+A
+</div>
+
+<h3>
+About Us
+</h3>
+
+<p>
+NVP ROYALS के बारे में जानें
+</p>
+
+</a>
+
+
+
+<!-- CONTACT -->
+
+<a
+    href="contact.html"
+    class="option-card"
+>
+
+<div class="option-icon">
+C
+</div>
+
+<h3>
+Contact
+</h3>
+
+<p>
+हमसे संपर्क करें
+</p>
+
+</a>
+
+
+
+<!-- DISTRIBUTOR -->
+
+<a
+    href="distributor.html"
+    class="option-card"
+>
+
+<div class="option-icon">
+D
+</div>
+
+<h3>
+Distributor
+</h3>
+
+<p>
+NVP ROYALS के distributor बनें
+</p>
+
+</a>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DISTRIBUTOR CTA
+===================================================== -->
+
+<section class="distributor-section">
+
+<div class="container">
+
+
+<div class="distributor-box">
+
+
+<h2>
+
+Become a
+<span>Distributor</span>
+
+</h2>
+
+
+<p>
+
+NVP ROYALS के साथ जुड़कर
+अपने क्षेत्र में हमारे products
+की distribution शुरू करें।
+
+</p>
+
+
+<a
+    href="distributor.html"
+    class="btn btn-primary"
+>
+
+Apply for Distributor
+
+</a>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+
+<div class="footer-brand">
+
+NVP ROYALS
+
+</div>
+
+
+<p>
+
+Legacy of Purity
+
+</p>
+
+
+<p>
+
+© 2026 NVP ROYALS. All Rights Reserved.
+
+</p>
+
+
+<div class="footer-links">
+
+
+<a href="index.html">
+Home
+</a>
+
+
+<a href="products.html">
+Products
+</a>
+
+
+<a href="about.html">
+About
+</a>
+
+
+<a href="distributor.html">
+Distributor
+</a>
+
+
+<a href="contact.html">
+Contact
+</a>
+
+
+</div>
+
+
+</footer>
+
+
+
+<!-- =====================================================
+     AUTHENTICATION
+===================================================== -->
+
+<script>
+
+/* =====================================================
+   SUPABASE CONFIG
+===================================================== */
+
+const SUPABASE_URL =
+"https://pybpdlubitlzlkmaohpw.supabase.co";
+
+
+const SUPABASE_KEY =
+"sb_publishable_Cki1_BdfpPeoU2yBgr1zIw_Ra7BqCwX";
+
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const profileBtn =
+document.getElementById(
+    "profileBtn"
+);
+
+const logoutBtn =
+document.getElementById(
+    "logoutBtn"
+);
+
+
+/* =====================================================
+   CHECK LOGIN
+===================================================== */
+
+async function checkUser(){
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+    .auth
+    .getSession();
+
+
+    /*
+       Error या session नहीं
+       → Login page
+    */
+
+    if(
+        error ||
+        !data.session
+    ){
+
+        window.location.replace(
+            "login.html"
+        );
+
+        return null;
+
+    }
+
+
+    return data.session;
+
+}
+
+
+/* =====================================================
+   INITIAL AUTH CHECK
+===================================================== */
+
+checkUser();
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+logoutBtn.addEventListener(
+    "click",
+    async function(){
+
+        logoutBtn.disabled = true;
+
+        logoutBtn.textContent =
+            "Logging out...";
+
+
+        const {
+            error
+        } =
+        await supabaseClient
+        .auth
+        .signOut();
+
+
+        if(error){
+
+            console.error(
+                "Logout error:",
+                error
+            );
+
+            alert(
+                "Logout नहीं हो पाया। कृपया फिर कोशिश करें।"
+            );
+
+            logoutBtn.disabled = false;
+
+            logoutBtn.textContent =
+                "Logout";
+
+            return;
+
+        }
+
+
+        window.location.replace(
+            "login.html"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   AUTH STATE CHANGE
+===================================================== */
+
+supabaseClient
+.auth
+.onAuthStateChange(
+    function(
+        event,
+        session
+    ){
+
+        if(
+            event === "SIGNED_OUT" ||
+            !session
+        ){
+
+            window.location.replace(
+                "login.html"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
