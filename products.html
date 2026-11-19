@@ -144,6 +144,12 @@
         </div>
       </div>
       <div class="card">
+        <h2>Telegram test</h2>
+        <p style="color:var(--muted);font-size:12.5px;margin:0 0 8px">Is button se check karein ki notification aapke Telegram par pahunch raha hai ya nahi.</p>
+        <button class="btn sm" onclick="testNotify()">Send test message</button>
+        <p class="msg" id="tnMsg"></p>
+      </div>
+      <div class="card">
         <h2>Low stock</h2>
         <div id="lowList"><div class="empty">Loading…</div></div>
       </div>
@@ -421,6 +427,29 @@ function renderDash(){
     return "<div class='prod'><div style='flex:1'><div class='nm'>"+esc(p.name)+"</div>"+
       "<div class='meta'>stock "+Number(p.stock_outer||0)+" pack · minimum "+p.min_stock+"</div></div></div>";
   }).join("") : "<div class='empty'>Sab theek hai — koi item low stock nahi.</div>";
+}
+
+/* ================= TELEGRAM TEST ================= */
+function testNotify(){
+  var m=$("tnMsg"); m.className="msg"; m.textContent="Bhej rahe hain…";
+  sb.functions.invoke("notify", { body: { text: "✅ NVP ROYALS test message — notification kaam kar raha hai." } })
+    .then(function(r){
+      if(r.error){
+        var base=r.error.message||"error";
+        if(r.error.context && typeof r.error.context.json==="function"){
+          r.error.context.json().then(function(j){
+            m.className="msg bad";
+            m.textContent="Failed: "+((j&&(j.error||j.description))?JSON.stringify(j):base);
+          }).catch(function(){ m.className="msg bad"; m.textContent="Failed: "+base; });
+        } else { m.className="msg bad"; m.textContent="Failed: "+base; }
+        return;
+      }
+      if(r.data && r.data.ok){
+        m.className="msg ok"; m.textContent="Message bhej diya — apna Telegram check karein.";
+      } else {
+        m.className="msg bad"; m.textContent="Telegram ne error diya: "+JSON.stringify(r.data||{});
+      }
+    });
 }
 
 /* ================= ITEMS ================= */
